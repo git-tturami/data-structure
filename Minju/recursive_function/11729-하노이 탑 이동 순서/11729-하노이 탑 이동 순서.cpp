@@ -2,8 +2,7 @@
 #pragma warning (disable: 4996)
 void hanoiTop(int n, int from, int to, int other) {
 	if (n == 0) { return; }
-	hanoiTop(n - 1, from, other, to
-	);
+	hanoiTop(n - 1, from, other, to);
 	printf("%d %d\n", from, to);
 	hanoiTop(n - 1, other, to, from);	
 }
