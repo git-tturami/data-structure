@@ -9,63 +9,63 @@ public class Main {
 			
 			String s[]=(br.readLine()).split(" ");
 
-			int W=Integer.parseInt(s[0]); //기존 몸무게
-			int C=Integer.parseInt(s[1]); //기존 기초 대사량
-			int B=C; //기존 섭취량 
+			int Weight=Integer.parseInt(s[0]); //기존 몸무게
+			int BMR=Integer.parseInt(s[1]); //기존 기초 대사량
+			int I=BMR; //기존 섭취량 
 			int T=Integer.parseInt(s[2]); //역칫값 
 			
-			String s2[]=(br.readLine()).split(" ");
+			s=(br.readLine()).split(" ");
 			
-			int D=Integer.parseInt(s2[0]); //다이어트 기간 
-			int i=Integer.parseInt(s2[1]); //후 섭취량
-			int a=Integer.parseInt(s2[2]); //후 활동량 
+			int Day=Integer.parseInt(s[0]); //다이어트 기간 
+			int AI=Integer.parseInt(s[1]); //후 섭취량
+			int Aa=Integer.parseInt(s[2]); //후 활동량 
 			
-			int criteria; //최종 변화량
-			int afterW=W; //변화 후 몸무게 
+			int change=0; //최종 변화량
+			int afterW=Weight; //변화 후 몸무게 
  			
 			//기초 대사량 변화 x 
-			criteria=(i-B-a);
-			afterW+=criteria*D;
+			change=(AI-BMR-Aa);
+			afterW+=change*Day;
 			
 			if(afterW<=0)
 				System.out.println("Danger Diet");
 			
 			else
-				System.out.println(afterW+" "+B);
+				System.out.println(afterW+" "+BMR);
 
-			afterW=W;
-			criteria=(i-B-a);
-			afterW+=criteria;	
-										
-				for(int k=1;k<D;k++) {
+			afterW=Weight;
+				
+				for(int k=0;k<Day;k++) {
 					
-					if(Math.abs(criteria)>T) {
+					change=AI-BMR-Aa;
 					
-						if (criteria%2==0) {
-							B=B+criteria/2;
+					if(Math.abs(change)>T) {
+					
+						if (change%2==0) {
+							BMR=BMR+change/2;
 						}
 						else {
-							B=B+criteria/2-1;
+							BMR=BMR+(change/2)-1;
 						}
-						criteria=(i-B-a);
-						afterW+=criteria;	
+						
+						afterW+=change;	
 					}
 					
 					else {
-						afterW+=criteria;
+						afterW+=change;
 					}
 					
 				}	
 
-				if(afterW<=0 || B<=0) 
+				if(afterW<=0 || BMR<=0) 
 					System.out.println("Danger Diet");
 
 				else {
-					if(C>B)
-						System.out.println(afterW+" "+B+" YOYO");
+					if(I>BMR)
+						System.out.println(afterW+" "+BMR+" YOYO");
 			
 					else
-						System.out.println(afterW+" "+B+" NO");
+						System.out.println(afterW+" "+BMR+" NO");
 			}
 		
 			br.close();
